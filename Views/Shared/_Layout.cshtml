@@ -1,0 +1,47 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    @*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />*@
+    <!--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />-->
+
+    <!-- Custom styles for this template -->
+
+    <!--<link href="~/Content/css/shop-homepage.css" rel="stylesheet" />-->
+    @Styles.Render("~/bundles/css")
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    @Html.Partial("_Header")
+
+    <!-- Page Content -->
+    <div class="container">
+        @RenderBody()
+
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    @Html.Partial("_Footer")
+
+    <!-- Bootstrap core JavaScript -->
+
+    @Scripts.Render("~/bundles/scripts")
+</body>
+
+</html>

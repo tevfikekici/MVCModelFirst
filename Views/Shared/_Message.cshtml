@@ -1,0 +1,16 @@
+﻿@model ModelFirst.ViewModels.MessageViewModel
+
+
+@if (Model.Status == true)
+{
+    <div class="alert alert-success" role="alert">
+        @Model.Message <a href="@Model.URL">@Model.LinkText</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.Message <a href="@Model.URL">@Model.LinkText</a>
+    </div>
+}
+

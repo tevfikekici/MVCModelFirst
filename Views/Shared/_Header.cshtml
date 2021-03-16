@@ -1,0 +1,32 @@
+﻿
+
+<nav class="navbar navbar-inverse" style="margin-top:-45px;">
+    <div class="container-fluid">
+
+        <ul class="nav navbar-nav">
+            <li class="active">
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            <li>
+                @if (User.IsInRole("Sales Manager"))
+                {
+                    @Html.ActionLink("Category", "Index", "Category")
+                }
+            </li>
+            <li>
+                @Html.ActionLink("Product", "Index", "Product")
+            </li>
+
+            <li> @Html.ActionLink("Sign Out", "SignOut", "Security")</li>
+        </ul>
+    </div>
+</nav>
+
+<div>
+    <div style="text-align:right; margin-right:25px;">
+        Total Order Quantity : 
+
+        @{Html.RenderAction("TotalOrderQuantity", "Home");}
+
+    </div>
+</div>

@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1> Content </h1>
+<h3> Bootstrap </h3>
+<h3> Partial View </h3>
+<h3> List Data </h3>
+<h3> Insert Data </h3>
+<h3> Update Data </h3>
+<h3> Delete Data </h3>
+<h3> Display </h3>
+
+
+<h3> Server Side Validation </h3>
+<h3> Client Side Validation </h3>
+
+<h3> AntiForgeryToken </h3>
+<p>
+    [ValidateAntiForgeryToken]<br />
+    public ActionResult Create(Category categoryInfo)
+    <br />...
+
+    <br /><br />
+    using (Html.BeginForm("Create", "Category", FormMethod.Post))<br />
+    {<br />
+    Html.AntiForgeryToken()<br />
+    ...
+</p>
+
+<h3> Authentication </h3>
+
+<p>
+    Web.config<br />
+    < authentication mode="Forms">
+    <br />
+    <forms loginUrl="Security/Login"></forms><br />
+    < /authentication >
+</p>
+<br />
+<p>
+    Global.asax: GlobalFilters.Filters.Add(new AuthorizeAttribute());
+</p>
+<p>
+    [AllowAnonymous]
+    <br />
+    public class SecurityController : Controller
+</p>
+<h3> Authorization </h3>
+<p>
+    CategoryController :
+    <br />
+    [Authorize(Roles = "Sales Representative")]
+</p>
+<p>
+    EmployeeRoleProvider: <br />
+    public override string[] GetRolesForUser(string username)
+    {
+
+    NorthwindEntities db = new NorthwindEntities();
+    var employee = db.Employees.FirstOrDefault(x => x.FirstName == username);
+    return new string[] { employee.Title};
+
+    }
+</p>
+<p>
+    Web.config : <br />
+    < roleManager enabled="true" defaultProvider="testRoleProvider">
+    < providers>
+    < add name="testRoleProvider" type="ModelFirst.Security.EmployeeRoleProvider" />
+    < /providers>
+    < /roleManager>
+</p>
+
+<p>
+    _Header.cshtml : <br />
+    if (User.IsInRole("Sales Manager"))
+    {
+    Html.ActionLink("Category", "Index", "Category")
+    }
+</p>
+<h3> Ajax Actionlink </h3>
+<h3> HTML.RenderAction </h3>
+<h3> Ajax BeginForm </h3>
+<h3> OutputCache </h3>
+<h3> Bundle Config </h3>
+Microsoft.AspNet.Web.Optimization Nuget package
+<br />
+<br />
+BundleConfig.cs :
+<br />
+  public static void RegisterBundles(BundleCollection bundles)
+<br />
+        {
+<br />
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+<br />
+                "~/Scripts/jquery.min.js",
+<br />
+                "~/Scripts/bootstrap.bundle.min.js",
+<br />
+             ...
+                ));
+<br />
+        }
+<br />
+
+<br />
+_Layout.cshtml :
+<br />
+ Scripts.Render("~/bundles/scripts")
+
+<br />
+Global.asax :
+<br />
+ BundleConfig.RegisterBundles(BundleTable.Bundles);
+<h3> Custom Error Page </h3>
+
+Global.asax :
+<br />
+  GlobalFilters.Filters.Add(new HandleErrorAttribute());
+<br />
+<br />
+
+Web.config:
+<br />
+
+< customErrors mode="On">
+    < error statusCode="404" redirect="/Error/NotFound" />
+< customErrors>
+<br />
+<br />
+
+ProductController : <br />
+  [HandleError]<br />
+    public class ProductController : Controller<br />
+    {<br />...<br />
+
+Shared/Error.cshtml<br />
+Error/NotFound.cshtml<br />
+
+<h3> Areas </h3>

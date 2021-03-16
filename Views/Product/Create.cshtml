@@ -1,0 +1,30 @@
+﻿@model ModelFirst.ViewModels.ProductViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>Create</h2>
+<div id="message"></div>
+@using (Ajax.BeginForm("Create", "Product", new AjaxOptions { HttpMethod="POST", UpdateTargetId="message"}))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductName)
+        @Html.TextBoxFor(m => m.Product.ProductName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Product.ProductName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.CategoryID)
+        @Html.DropDownListFor(m => m.Product.CategoryID, new SelectList(Model.Categories, "CategoryID", "CategoryName"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Product.CategoryID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.SupplierID)
+        @Html.DropDownListFor(m => m.Product.SupplierID, new SelectList(Model.Suppliers, "SupplierID", "CompanyName"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Product.SupplierID)
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+}

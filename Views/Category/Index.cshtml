@@ -1,0 +1,52 @@
+﻿@using ModelFirst.Models.EntityFramework 
+@model List<Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a class="btn btn-success" href="/Category/Create"> Create </a>
+
+<h1> Category List</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th width="20%">Category ID</th>
+            <th width="60%">Category Name</th>
+            <th>List</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+        <tr>
+            <td>@category.CategoryID</td>
+            <td>@category.CategoryName</td>
+            <td>
+                @Ajax.ActionLink("List Products", "ListByCategory", "Category", new
+           { CategoryID = category.CategoryID }, new AjaxOptions { HttpMethod = "GET",UpdateTargetId= "ProductList" },
+           new { @class = "btn btn-primary" })
+            </td>
+
+            @*<td>
+                @Html.ActionLink("List Products", "ListByCategory", new { CategoryID = category.CategoryID }, new { @class = "btn btn-primary" })
+            </td>*@
+
+            <td>
+                @Html.ActionLink("Update", "Update", new { CategoryID = category.CategoryID }, new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { CategoryID = category.CategoryID }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this?');" })
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+<div id="ProductList">
+
+</div>

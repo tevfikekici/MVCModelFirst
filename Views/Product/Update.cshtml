@@ -1,0 +1,29 @@
+﻿@model ModelFirst.ViewModels.ProductViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update</h2>
+
+@using (Html.BeginForm("Update", "Product", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductName)
+        @Html.TextBoxFor(m => m.Product.ProductName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.CategoryID)
+        @Html.DropDownListFor(m => m.Product.CategoryID, new SelectList(Model.Categories, "CategoryID", "CategoryName"), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.SupplierID)
+        @Html.DropDownListFor(m => m.Product.SupplierID, new SelectList(Model.Suppliers, "SupplierID", "CompanyName"), new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Product.ProductID)
+    @*@Html.TextBoxFor(m => m.Product.ProductID)*@
+    <br />
+    <button type="submit" class="btn btn-success">Update</button>
+}
